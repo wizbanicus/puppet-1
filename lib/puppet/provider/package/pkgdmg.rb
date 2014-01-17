@@ -59,7 +59,7 @@ Puppet::Type.type(:package).provide :pkgdmg, :parent => Puppet::Provider::Packag
   end
 
   def self.installpkg(source, name, orig_source)
-    installer "-pkg", source, "-target", "/"
+    installer "-allowUntrusted -pkg", source, "-target", "/"
     # Non-zero exit status will throw an exception.
     File.open("/var/db/.puppet_pkgdmg_installed_#{name}", "w") do |t|
       t.print "name: '#{name}'\n"
